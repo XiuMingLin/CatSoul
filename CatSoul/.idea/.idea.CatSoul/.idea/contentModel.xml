@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\XiuMing\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\XiuMing\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CatSoul.-122310729.00" t="ExcludeRecursive" />
+    <e p="D:\Study\Github\CatSoul\CatSoul" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Bomb.cs" t="Include" />
+          <e p="CanChoose.cs" t="Include" />
+          <e p="Flail.cs" t="Include" />
+          <e p="FSMClearSignals.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="LaserShoot.cs" t="Include" />
+          <e p="PathVert.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="ZapField.cs" t="Include" />
+        </e>
+      </e>
+      <e p="CatSoul.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
