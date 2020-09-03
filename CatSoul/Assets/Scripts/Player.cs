@@ -34,13 +34,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
+        _animator.SetBool("isGround", isGround);
     }
 
     private void FixedUpdate()
     {
-        isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
-        _animator.SetBool("isGround", isGround);
         GroundMovement();
         Jump();
         BestJump();
