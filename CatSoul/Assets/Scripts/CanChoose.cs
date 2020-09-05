@@ -13,7 +13,7 @@ public class CanChoose : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager._instance.isRuning)
+        if (GameManager._instance.isRuning)
         {
             this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
@@ -21,19 +21,23 @@ public class CanChoose : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        //Debug.Log("OnMouseEnter");
+        Debug.Log("OnMouseEnter");
         if (!GameManager._instance.isRuning)
         {
             this.GetComponent<SpriteRenderer>().enabled = true;
+            GameManager._instance.canCreate = false;
+            Debug.Log("canCreate");
         }
     }
 
     private void OnMouseExit()
     {
-        //Debug.Log("OnMouseExit");
+        Debug.Log("OnMouseExit");
         if (!GameManager._instance.isRuning)
         {
             this.GetComponent<SpriteRenderer>().enabled = false;
+            GameManager._instance.canCreate = true;
+            Debug.Log("cantCreate");
         }
     }
 }

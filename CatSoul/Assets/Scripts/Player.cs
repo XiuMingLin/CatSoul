@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
 
+    public static Player _instance;
+
     public float GBScale = 0;
     public float moveSpeed = 0;
     public float jumpForce = 0;
@@ -23,6 +25,12 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
+
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -53,9 +61,11 @@ public class Player : MonoBehaviour
         if(collision.CompareTag("GB"))
         {
             this.GetComponent<Rigidbody2D>().gravityScale = GBScale;
+            Debug.Log("Enter GB");
         }
         if(collision.CompareTag("GF"))
         {
+            Debug.Log("Enter GF");
             this.GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(this.GetComponent<Rigidbody2D>().velocity, Vector2.zero, 0.8f);
             this.GetComponent<Rigidbody2D>().gravityScale = -this.GetComponent<Rigidbody2D>().gravityScale;
         }
@@ -65,6 +75,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("GB"))
         {
+            Debug.Log("Exit GB");
             this.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
         }
     }
@@ -80,13 +91,20 @@ public class Player : MonoBehaviour
         }
         if(other.collider.CompareTag("Boom"))
         {
-            other.transform.GetChild(0).GetComponent<Animator>().SetBool("Boom", true);
+            other.transform.GetComponent<Animator>().SetBool("Boom", true);
         }
 
         if (other.collider.CompareTag("Goal"))
         {
             GameManager._instance.isWin = true;
             Time.timeScale = 0;
+            Debug.Log("GameWin");
+        }
+
+        if (other.collider.CompareTag("Trap"))
+        {
+            Time.timeScale = 0;
+            Debug.Log("GameOver!!!");
         }
     }
 

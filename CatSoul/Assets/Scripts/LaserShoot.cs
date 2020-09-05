@@ -22,12 +22,15 @@ public class LaserShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CD -= Time.deltaTime;
-        if (CD <= 0)
+        if (GameManager._instance.isRuning)
         {
-            anim.SetTrigger("Shoot");
-            CD = ShootCD;
+            CD -= Time.deltaTime;
+            if (CD <= 0)
+            {
+                anim.SetTrigger("Shoot");
+                CD = ShootCD;
+            }
         }
     }
-    
+
 }

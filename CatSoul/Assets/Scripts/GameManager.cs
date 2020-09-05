@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool isRuning = false;
     public static int curLevel = 0;
     public bool isWin = false;
+    public bool canCreate = true;
     
     public GameObject border;
     public GameObject player;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         mousePosition = Input.mousePosition;
 
-        if (Input.GetMouseButtonDown(0) && !isRuning)
+        if (Input.GetMouseButtonDown(0) && !isRuning && canCreate)
         {
             CreateItem();
         }
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         border.SetActive(true);
         isRuning = true;
+        Player._instance.GetComponent<Rigidbody2D>().gravityScale = 1;
     }
 
     public void CreateItem()
