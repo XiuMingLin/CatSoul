@@ -28,6 +28,6 @@ public class PathVert : MonoBehaviour
     private void FixedUpdate()
     {
         float movement = Mathf.PingPong(Time.time * moveSpeed, 1);
-        PlatformVert.position = Vector3.Lerp(new Vector3(0, 1.5f, 0), new Vector3(0, -1.5f, 0), movement);
+        PlatformVert.position = Vector3.Lerp(start.position, end.position, movement);
     }
 }

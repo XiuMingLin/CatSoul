@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public bool isRuning = false;
     public static int curLevel = 0;
+    public bool isWin = false;
     
     public GameObject border;
     public GameObject player;
@@ -26,7 +27,15 @@ public class GameManager : MonoBehaviour
 
     public Item[] items;
     public List<GameObject> oneTimesItems;
-    
+
+    public static GameManager _instance;
+
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +62,6 @@ public class GameManager : MonoBehaviour
     {
         border.SetActive(true);
         isRuning = true;
-        // 先设置为从0，0，0生成
-        // 之后改成选定位置生成
     }
 
     public void CreateItem()

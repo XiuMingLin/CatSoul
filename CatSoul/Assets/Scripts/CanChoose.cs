@@ -13,18 +13,27 @@ public class CanChoose : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!GameManager._instance.isRuning)
+        {
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        }
     }
 
     private void OnMouseEnter()
     {
-        Debug.Log("OnMouseEnter");
-        this.GetComponent<SpriteRenderer>().enabled = true;
+        //Debug.Log("OnMouseEnter");
+        if (!GameManager._instance.isRuning)
+        {
+            this.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
     private void OnMouseExit()
     {
-        Debug.Log("OnMouseExit");
-        this.GetComponent<SpriteRenderer>().enabled = false;
+        //Debug.Log("OnMouseExit");
+        if (!GameManager._instance.isRuning)
+        {
+            this.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 }

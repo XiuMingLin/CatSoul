@@ -9,6 +9,7 @@ TagManager:
   - GB
   - GF
   - Spring
+  - Boom
   layers:
   - Default
   - TransparentFX

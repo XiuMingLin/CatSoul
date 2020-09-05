@@ -40,9 +40,12 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GroundMovement();
-        Jump();
-        BestJump();
+        if (GameManager._instance.isRuning)
+        {
+            GroundMovement();
+            Jump();
+            BestJump();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,6 +77,16 @@ public class Player : MonoBehaviour
             other.gameObject.GetComponent<Animator>().SetTrigger("Spring");
             this._animator.SetTrigger("Jump");
             this._rigidbody2D.AddForce(transform.up * springForce);
+        }
+        if(other.collider.CompareTag("Boom"))
+        {
+            other.transform.GetChild(0).GetComponent<Animator>().SetBool("Boom", true);
+        }
+
+        if (other.collider.CompareTag("Goal"))
+        {
+            GameManager._instance.isWin = true;
+            Time.timeScale = 0;
         }
     }
 
