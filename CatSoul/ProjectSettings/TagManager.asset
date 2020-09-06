@@ -10,6 +10,7 @@ TagManager:
   - GF
   - Spring
   - Boom
+  - Col
   layers:
   - Default
   - TransparentFX

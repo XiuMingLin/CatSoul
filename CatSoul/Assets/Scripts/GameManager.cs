@@ -12,11 +12,17 @@ public class GameManager : MonoBehaviour
     public static int curLevel = 0;
     public bool isWin = false;
     public bool canCreate = true;
+
+    public string playerPath = "Prefabs/Player";
+    public string goalPath = "Prefabs/Goal";
+    
+    public static bool isHave = false;
     
     public GameObject border;
-    public GameObject player;
 
     private Vector3 mousePosition;
+
+    public Vector2 playerPos;
     
 
     [Serializable]
@@ -35,17 +41,26 @@ public class GameManager : MonoBehaviour
     {
         if (_instance == null)
             _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!isHave)
+        {
+            isHave = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+
         mousePosition = Input.mousePosition;
 
         if (Input.GetMouseButtonDown(0) && !isRuning && canCreate)
@@ -53,7 +68,7 @@ public class GameManager : MonoBehaviour
             CreateItem();
         }
         
-        if (Input.GetKeyDown(KeyCode.Space) && !isRuning)
+        if (Input.GetKeyDown(KeyCode.Space) && !isRuning && oneTimesItems.Count == 0)
         {
             StartGame();
         }
@@ -61,7 +76,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        border.SetActive(true);
+        playerPos = Player._instance.transform.position;
+        Instantiate(border, Vector3.zero, Quaternion.identity);
         isRuning = true;
         Player._instance.GetComponent<Rigidbody2D>().gravityScale = 1;
     }

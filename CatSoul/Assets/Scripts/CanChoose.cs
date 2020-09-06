@@ -15,6 +15,7 @@ public class CanChoose : MonoBehaviour
     {
         if (GameManager._instance.isRuning)
         {
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
     }

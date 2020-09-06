@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -99,14 +100,24 @@ public class Player : MonoBehaviour
             GameManager._instance.isWin = true;
             other.transform.parent.GetChild(2).GetComponent<ParticleSystem>().Play();
             other.transform.parent.GetChild(1).GetComponent<ParticleSystem>().Pause();
-            Time.timeScale = 0;
-            Debug.Log("GameWin");
+            GameManager._instance.isRuning = false;
+            _rigidbody2D.velocity = Vector2.zero;
+            Invoke("nextScene", 3.0f);
         }
 
         if (other.collider.CompareTag("Trap"))
         {
-            Time.timeScale = 0;
+            // Time.timeScale = 0;
             Debug.Log("GameOver!!!");
+            ResetPlayer();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Col"))
+        {
+            ResetPlayer();
         }
     }
 
@@ -145,5 +156,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+    private void nextScene()
+    {
+        GameManager.curLevel++;
+        Debug.Log("GameWin");
+        if (GameManager.curLevel >= 4)
+        {
+            UIManager._instance.SendMessage("GameWin");
+            Time.timeScale = 0;
+        }
+        else
+        {
+            GameManager._instance.isRuning = false;
+            GameManager._instance.isWin = false;
+            GameManager._instance.canCreate = true;
+            GameManager._instance.oneTimesItems.Add(Resources.Load(GameManager._instance.playerPath, typeof(GameObject)) as GameObject);
+            GameManager._instance.oneTimesItems.Add(Resources.Load(GameManager._instance.goalPath, typeof(GameObject)) as GameObject);
+            SceneManager.LoadScene("Main");
+        }
+    }
+
+    private void ResetPlayer()
+    {
+        this.gameObject.transform.position = GameManager._instance.playerPos;
+    }
 }
