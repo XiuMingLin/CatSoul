@@ -97,6 +97,8 @@ public class Player : MonoBehaviour
         if (other.collider.CompareTag("Goal"))
         {
             GameManager._instance.isWin = true;
+            other.transform.parent.GetChild(2).GetComponent<ParticleSystem>().Play();
+            other.transform.parent.GetChild(1).GetComponent<ParticleSystem>().Pause();
             Time.timeScale = 0;
             Debug.Log("GameWin");
         }
