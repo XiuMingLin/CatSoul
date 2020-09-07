@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
             this.GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(this.GetComponent<Rigidbody2D>().velocity, Vector2.zero, 0.8f);
             this.GetComponent<Rigidbody2D>().gravityScale = -this.GetComponent<Rigidbody2D>().gravityScale;
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -102,6 +103,7 @@ public class Player : MonoBehaviour
             other.transform.parent.GetChild(1).GetComponent<ParticleSystem>().Pause();
             GameManager._instance.isRuning = false;
             _rigidbody2D.velocity = Vector2.zero;
+            _rigidbody2D.gravityScale = 0;
             Invoke("nextScene", 3.0f);
         }
 
@@ -109,14 +111,6 @@ public class Player : MonoBehaviour
         {
             // Time.timeScale = 0;
             Debug.Log("GameOver!!!");
-            ResetPlayer();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Col"))
-        {
             ResetPlayer();
         }
     }

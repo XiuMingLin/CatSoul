@@ -16,9 +16,9 @@
           <e p="Other.cs" t="Include" />
           <e p="PathVert.cs" t="Include" />
           <e p="Player.cs" t="Include" />
+          <e p="UIManager.cs" t="Include" />
           <e p="ZapField.cs" t="Include" />
         </e>
-        <e p="UIManager.cs" t="Include" />
       </e>
       <e p="CatSoul.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
