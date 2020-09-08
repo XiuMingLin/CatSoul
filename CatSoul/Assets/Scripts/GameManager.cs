@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using Random = UnityEngine.Random;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using LitJson;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +29,8 @@ public class GameManager : MonoBehaviour
     private Vector3 mousePosition;
 
     public Vector2 playerPos;
+
+    public Transform clones;
     
 
     [Serializable]
@@ -49,20 +57,31 @@ public class GameManager : MonoBehaviour
     {
         if (!isHave)
         {
+            Instantiate(gameObject);
+            clones = GameObject.Find("Clone").transform;
             isHave = true;
         }
         else
         {
             Destroy(gameObject);
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (SceneManager.GetActiveScene().name == "Welcome")
+        {
+            isHave = false;
+            Destroy(gameObject);
+        }
+        
         mousePosition = Input.mousePosition;
 
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        
         if (Input.GetMouseButtonDown(0) && !isRuning && canCreate)
         {
             CreateItem();
@@ -89,13 +108,39 @@ public class GameManager : MonoBehaviour
         if (choose == 1 || oneTimesItems.Count == 0)
         {
             int index = Random.Range(0, items[curLevel].moreTimesItem.Length);
-            Instantiate(items[curLevel].moreTimesItem[index], targerMousePos, Quaternion.identity);
+            GameObject go = Instantiate(items[curLevel].moreTimesItem[index], targerMousePos, Quaternion.identity);
+            go.transform.parent = clones;
         }
         else
         {
             int index = Random.Range(0, oneTimesItems.Count);
-            Instantiate(oneTimesItems[index], targerMousePos, Quaternion.identity);
+            GameObject go = Instantiate(oneTimesItems[index], targerMousePos, Quaternion.identity);
+            go.transform.parent = clones;
             oneTimesItems.RemoveAt(index);
         }
+    }
+
+
+    public void SaveAllItem()
+    {
+        StringBuilder sb = new StringBuilder();
+        JsonWriter writer = new JsonWriter(sb);
+        writer.WriteArrayStart();
+        for (int i = 0; i < clones.childCount; i++)
+        {
+            writer.WriteObjectStart();
+            writer.WritePropertyName("ItemName");
+            writer.Write(clones.GetChild(i).name);
+            writer.WritePropertyName("x");
+            writer.Write(clones.GetChild(i).position.x);
+            writer.WritePropertyName("y");
+            writer.Write(clones.GetChild(i).position.y);
+            writer.WritePropertyName("z");
+            writer.Write(clones.GetChild(i).position.z);
+            writer.WriteObjectEnd();
+        }
+        writer.WriteArrayEnd();
+        JsonData jd = JsonMapper.ToObject(sb.ToString());
+        Debug.Log(sb.ToString());
     }
 }

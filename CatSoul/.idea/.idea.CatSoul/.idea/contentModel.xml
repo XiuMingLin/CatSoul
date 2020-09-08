@@ -9,6 +9,7 @@
         <e p="Scripts" t="Include">
           <e p="Bomb.cs" t="Include" />
           <e p="CanChoose.cs" t="Include" />
+          <e p="Clones.cs" t="Include" />
           <e p="Flail.cs" t="Include" />
           <e p="FSMClearSignals.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
@@ -16,9 +17,11 @@
           <e p="Other.cs" t="Include" />
           <e p="PathVert.cs" t="Include" />
           <e p="Player.cs" t="Include" />
+          <e p="PlayerWelcome.cs" t="Include" />
           <e p="UIManager.cs" t="Include" />
           <e p="ZapField.cs" t="Include" />
         </e>
+        <e p="WhirPool.cs" t="Include" />
       </e>
       <e p="CatSoul.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

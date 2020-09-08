@@ -166,6 +166,10 @@ public class Player : MonoBehaviour
             GameManager._instance.canCreate = true;
             GameManager._instance.oneTimesItems.Add(Resources.Load(GameManager._instance.playerPath, typeof(GameObject)) as GameObject);
             GameManager._instance.oneTimesItems.Add(Resources.Load(GameManager._instance.goalPath, typeof(GameObject)) as GameObject);
+            for (int i = 0; i < GameManager._instance.clones.childCount; i++)
+            {
+                Destroy(GameManager._instance.clones.GetChild(i).gameObject);
+            }
             SceneManager.LoadScene("Main");
         }
     }

@@ -11,6 +11,7 @@ TagManager:
   - Spring
   - Boom
   - Col
+  - Exit
   layers:
   - Default
   - TransparentFX
