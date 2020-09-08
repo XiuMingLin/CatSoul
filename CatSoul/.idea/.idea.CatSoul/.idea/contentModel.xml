@@ -19,9 +19,9 @@
           <e p="Player.cs" t="Include" />
           <e p="PlayerWelcome.cs" t="Include" />
           <e p="UIManager.cs" t="Include" />
+          <e p="WhirPool.cs" t="Include" />
           <e p="ZapField.cs" t="Include" />
         </e>
-        <e p="WhirPool.cs" t="Include" />
       </e>
       <e p="CatSoul.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

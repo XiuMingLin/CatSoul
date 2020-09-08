@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Image = UnityEngine.UI.Image;
 
 public class PlayerWelcome : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class PlayerWelcome : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
+
+    public Transform ResetPos;
+
+    public Image QuitUI;
 
     private void Awake()
     {
@@ -92,7 +97,18 @@ public class PlayerWelcome : MonoBehaviour
         if (other.collider.CompareTag("Exit"))
         {
             Debug.Log("quit");
-            Application.Quit();
+            QuitUI.gameObject.SetActive(true);
         }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Reset()
+    {
+        transform.position = ResetPos.position;
+        QuitUI.gameObject.SetActive(false);
     }
 }
