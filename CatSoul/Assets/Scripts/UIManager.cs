@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
 
     public void BackToWelcome()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Welcome");
     }
 }

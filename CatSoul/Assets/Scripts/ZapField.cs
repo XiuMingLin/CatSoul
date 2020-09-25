@@ -21,7 +21,7 @@ public class ZapField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isRun)
+        if (isRun && GameManager._instance.isRuning)
         {
             curTime -= Time.deltaTime;
             if (curTime <= 0)
